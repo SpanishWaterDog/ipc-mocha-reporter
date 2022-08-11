@@ -1,0 +1,20 @@
+// redefinition of mocha interface into enum for ease of use
+export enum RunnerConstants {
+  EVENT_HOOK_BEGIN = "hook",
+  EVENT_HOOK_END = "hook end",
+  EVENT_RUN_BEGIN = "start",
+  EVENT_DELAY_BEGIN = "waiting",
+  EVENT_DELAY_END = "ready",
+  EVENT_RUN_END = "end",
+  EVENT_SUITE_BEGIN = "suite",
+  EVENT_SUITE_END = "suite end",
+  EVENT_TEST_BEGIN = "test",
+  EVENT_TEST_END = "test end",
+  EVENT_TEST_FAIL = "fail",
+  EVENT_TEST_PASS = "pass",
+  EVENT_TEST_PENDING = "pending",
+  EVENT_TEST_RETRY = "retry",
+  STATE_IDLE = "idle",
+  STATE_RUNNING = "running",
+  STATE_STOPPED = "stopped",
+}
