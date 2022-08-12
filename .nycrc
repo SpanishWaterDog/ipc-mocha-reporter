@@ -1,0 +1,14 @@
+{
+  "all": true,
+  "extension": [
+    ".js",
+    ".cjs",
+    ".mjs",
+    ".ts",
+    ".tsx",
+    ".jsx"
+  ],
+  "include": [
+    "src/**"
+  ]
+}
