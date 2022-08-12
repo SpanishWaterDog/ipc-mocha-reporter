@@ -6,10 +6,12 @@
       "decorators": true,
       "dynamicImport": true
     },
-    "target": "es2021",
+    "target": "es2020",
     "baseUrl": "./src"
   },
   "module": {
-    "type": "commonjs"
+    "type": "commonjs",
+    "strict": true,
+    "noInterop": true
   }
 }

@@ -1,5 +1,8 @@
+import ipc from "node-ipc";
+import { IpcMode } from "./ipcMode";
 export interface Options {
-  ipcId: string;
-  ipcSilent: boolean;
   ipcSocketId: string;
+  ipcMode: IpcMode;
+
+  nodeIpcConfig: typeof ipc.config;
 }
