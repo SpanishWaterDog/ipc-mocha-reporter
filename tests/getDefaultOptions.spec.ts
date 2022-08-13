@@ -9,7 +9,7 @@ describe("getDefaultOptions", () => {
     const expectedResult = {
       ipcSocketId: "ipc-reporter",
       ipcMode: IpcMode.client,
-      nodeIpcConfig: ipc.config,
+      nodeIpcConfig: { ...ipc.config, silent: true },
     };
 
     assert.deepEqual(getDefaultOptions(options), expectedResult);
@@ -20,7 +20,7 @@ describe("getDefaultOptions", () => {
     const expectedResult = {
       ipcSocketId: "test-reporter",
       ipcMode: IpcMode.client,
-      nodeIpcConfig: ipc.config,
+      nodeIpcConfig: { ...ipc.config, silent: true },
     };
 
     assert.deepEqual(getDefaultOptions(options), expectedResult);
@@ -31,7 +31,7 @@ describe("getDefaultOptions", () => {
     const expectedResult = {
       ipcSocketId: "ipc-reporter",
       ipcMode: IpcMode.client,
-      nodeIpcConfig: { ...ipc.config, id: "test" },
+      nodeIpcConfig: { ...ipc.config, silent: true, id: "test" },
     };
 
     assert.deepEqual(getDefaultOptions(options), expectedResult);

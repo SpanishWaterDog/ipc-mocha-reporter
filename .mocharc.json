@@ -1,5 +1,7 @@
 {
   "spec": "tests/**/*.spec.ts",
-  "require": "@swc/register",
-  "extension": ["ts"]
+  "require": ["@swc/register"],
+  "extension": ["ts"],
+  "exit": true,
+  "parallel": false
 }
