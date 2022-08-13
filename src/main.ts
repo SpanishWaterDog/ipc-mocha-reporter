@@ -24,6 +24,7 @@ class IpcReporter {
           queue.resume();
         });
         ipc.of[parsedOptions.ipcSocketId].on("error", (err) => {
+          console.log(err);
           queue.pause();
         });
       });
@@ -36,4 +37,7 @@ class IpcReporter {
   }
 }
 
-export default IpcReporter;
+// propably could be fixed in tsconfig
+// but I could't find a way and it also works
+module.exports = IpcReporter;
+// export default IpcReporter;

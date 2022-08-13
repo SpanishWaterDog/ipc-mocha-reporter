@@ -4,14 +4,17 @@
       "syntax": "typescript",
       "tsx": false,
       "decorators": true,
-      "dynamicImport": true
+      "dynamicImport": true,
+      "exportDefaultFrom": true,
+      "exportNamespaceFrom": true
     },
     "target": "es2020",
     "baseUrl": "./src"
   },
+  "isModule": true,
   "module": {
     "type": "commonjs",
     "strict": true,
-    "noInterop": true
+    "noInterop": false
   }
 }

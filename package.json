@@ -5,7 +5,7 @@
   "main": "src/main.ts",
   "scripts": {
     "build": "swc src -d lib",
-    "test": "yarn build && mocha tests/**/*.spec.ts -r @swc/register -extension ts",
+    "test": "yarn build && mocha",
     "test-with-coverage": "nyc --reporter=text yarn test"
   },
   "files": [
