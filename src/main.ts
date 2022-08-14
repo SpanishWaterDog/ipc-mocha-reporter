@@ -29,7 +29,7 @@ class IpcReporter {
         });
       });
     } else {
-      ipc.serve();
+      ipc.serveNet();
       ipc.server.start();
     }
 
