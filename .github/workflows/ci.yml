@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [develop]
+  pull_request:
+    branches: "**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - uses: actions/cache@v2
+        id: ci-node-modules-cache-2
+        with:
+          path: |
+            **/node_modules
+          key: ${{ runner.os }}-ci-node-modules-2-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-ci-node-modules-2
+      - name: Yarn install deps
+        if: steps.ci-node-modules-cache-2.outputs.cache-hit != 'true'
+        run: |
+          yarn install --frozen-lockfile
+      - run: yarn test
