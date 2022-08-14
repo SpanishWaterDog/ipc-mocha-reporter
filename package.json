@@ -6,7 +6,8 @@
   "scripts": {
     "build": "swc src -d lib",
     "test": "yarn build && mocha",
-    "test-with-coverage": "nyc --reporter=text yarn test"
+    "test-with-coverage": "nyc --reporter=text yarn test",
+    "prepare": "husky install"
   },
   "files": [
     "lib/**/*"
@@ -22,6 +23,7 @@
     "@types/mocha": "^9.1.1",
     "@types/node": "^18.6.5",
     "@types/node-ipc": "^9.2.0",
+    "husky": "^8.0.1",
     "mocha": "^10.0.0",
     "nyc": "^15.1.0",
     "type-fest": "^2.18.0"

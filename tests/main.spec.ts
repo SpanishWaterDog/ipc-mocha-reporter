@@ -15,7 +15,6 @@ describe("IPC mocha reporter", () => {
     id = new Date().toISOString();
     ipc.config.silent = true;
     ipc.config.id = id;
-    console.log(id);
   });
 
   afterEach(() => {
