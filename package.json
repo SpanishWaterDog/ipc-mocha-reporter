@@ -1,5 +1,5 @@
 {
-  "name": "mocha-ipc-reporter",
+  "name": "@nikkoni/ipc-mocha-reporter",
   "version": "0.1.0",
   "description": "",
   "main": "src/main.ts",
@@ -12,7 +12,7 @@
     "lib/**/*"
   ],
   "keywords": [],
-  "author": "",
+  "author": "Jonasz Potoniec <jonasz@potoniec.eu>",
   "license": "ISC",
   "devDependencies": {
     "@swc/cli": "^0.1.57",
@@ -30,5 +30,9 @@
     "async": "^3.2.4",
     "lodash": "^4.17.21",
     "node-ipc": "^11.1.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SpanishWaterDog/ipc-mocha-reporter.git"
   }
 }
