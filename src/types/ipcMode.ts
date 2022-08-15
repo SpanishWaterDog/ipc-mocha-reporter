@@ -1,4 +1,6 @@
 export enum IpcMode {
-  client,
-  server,
+  CLIENT = "client",
+  SERVER = "server",
+  CLIENT_NET = "client-net",
+  SERVER_NET = "server-net",
 }

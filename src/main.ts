@@ -18,28 +18,57 @@ class IpcReporter {
     const queue = createQueue(parsedOptions.ipcSocketId, parsedOptions.ipcMode);
     ipc.config = parsedOptions.nodeIpcConfig;
 
-    if (parsedOptions.ipcMode === IpcMode.client) {
-      ipc.connectToNet(parsedOptions.ipcSocketId, () => {
-        ipc.of[parsedOptions.ipcSocketId].on("connect", () => {
-          queue.resume();
+    switch (parsedOptions.ipcMode) {
+      case IpcMode.CLIENT:
+        ipc.connectTo(parsedOptions.ipcSocketId, () => {
+          ipc.of[parsedOptions.ipcSocketId].on("connect", () => {
+            queue.resume();
+          });
+          ipc.of[parsedOptions.ipcSocketId].on("error", (err) => {
+            console.log(err);
+            queue.pause();
+          });
+          ipc.of[parsedOptions.ipcSocketId].on("kill", () => {
+            ipc.disconnect(parsedOptions.ipcSocketId);
+            process.exit();
+          });
         });
-        ipc.of[parsedOptions.ipcSocketId].on("error", (err) => {
-          console.log(err);
-          queue.pause();
+        break;
+      case IpcMode.CLIENT_NET:
+        ipc.connectToNet(parsedOptions.ipcSocketId, () => {
+          ipc.of[parsedOptions.ipcSocketId].on("connect", () => {
+            queue.resume();
+          });
+          ipc.of[parsedOptions.ipcSocketId].on("error", (err) => {
+            console.log(err);
+            queue.pause();
+          });
+          ipc.of[parsedOptions.ipcSocketId].on("kill", () => {
+            ipc.disconnect(parsedOptions.ipcSocketId);
+            process.exit();
+          });
         });
-        ipc.of[parsedOptions.ipcSocketId].on("kill", () => {
-          ipc.disconnect(parsedOptions.ipcSocketId);
-          process.exit();
+        break;
+      case IpcMode.SERVER:
+        ipc.serve(() => {
+          ipc.server.on("kill", () => {
+            ipc.server.stop();
+            process.exit();
+          });
         });
-      });
-    } else {
-      ipc.serveNet(() => {
-        ipc.server.on("kill", () => {
-          ipc.server.stop();
-          process.exit();
+        ipc.server.start();
+        break;
+      case IpcMode.SERVER_NET:
+        ipc.serveNet(() => {
+          ipc.server.on("kill", () => {
+            ipc.server.stop();
+            process.exit();
+          });
         });
-      });
-      ipc.server.start();
+        ipc.server.start();
+        break;
+      default:
+        throw new Error("ipc mode not specified");
     }
 
     configureRunner(runner, queue);

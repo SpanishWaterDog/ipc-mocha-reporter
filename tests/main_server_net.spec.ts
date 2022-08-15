@@ -5,7 +5,7 @@ import { initializeMocha } from "./utils/mocha";
 describe("IPC mocha reporter - server mode", () => {
   let ipc;
   let id = new Date().toISOString();
-  let mocha = initializeMocha(IpcMode.client, id);
+  let mocha;
   let mochaRunner;
 
   beforeEach(() => {
@@ -13,7 +13,7 @@ describe("IPC mocha reporter - server mode", () => {
     id = new Date().toISOString();
     ipc.config.silent = true;
     ipc.config.id = id;
-    mocha = initializeMocha(IpcMode.server, id);
+    mocha = initializeMocha(IpcMode.SERVER_NET, id);
   });
 
   afterEach(() => {

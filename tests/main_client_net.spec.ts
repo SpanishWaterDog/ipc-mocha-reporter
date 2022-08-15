@@ -23,7 +23,7 @@ describe("IPC mocha reporter - client mode", () => {
   });
 
   it("connects to ipc on start", (done) => {
-    const mocha = initializeMocha(IpcMode.client, id);
+    const mocha = initializeMocha(IpcMode.CLIENT_NET, id);
     let mochaRunner;
     ipc.serveNet(() => {
       ipc.server.on("connect", () => {
@@ -37,7 +37,7 @@ describe("IPC mocha reporter - client mode", () => {
   });
 
   it("receives message on start", (done) => {
-    const mocha = initializeMocha(IpcMode.client, id);
+    const mocha = initializeMocha(IpcMode.CLIENT_NET, id);
     let mochaRunner;
     ipc.serveNet(() => {
       ipc.server.on(RunnerConstants.EVENT_RUN_BEGIN, () => {
@@ -51,7 +51,7 @@ describe("IPC mocha reporter - client mode", () => {
   });
 
   it("receives message on suite start", (done) => {
-    const mocha = initializeMocha(IpcMode.client, id);
+    const mocha = initializeMocha(IpcMode.CLIENT_NET, id);
     const suite = new Mocha.Suite("Test Suite");
     let mochaRunner;
     suite.addTest(
@@ -86,7 +86,7 @@ describe("IPC mocha reporter - client mode", () => {
   });
 
   it("receives message on test pass", (done) => {
-    const mocha = initializeMocha(IpcMode.client, id);
+    const mocha = initializeMocha(IpcMode.CLIENT_NET, id);
     const suite = new Mocha.Suite("Test Suite");
     let mochaRunner;
     suite.addTest(
@@ -111,7 +111,7 @@ describe("IPC mocha reporter - client mode", () => {
   });
 
   it("receives message on test fail", (done) => {
-    const mocha = initializeMocha(IpcMode.client, id);
+    const mocha = initializeMocha(IpcMode.CLIENT_NET, id);
     const suite = new Mocha.Suite("Test Suite");
     let mochaRunner;
     suite.addTest(
@@ -136,7 +136,7 @@ describe("IPC mocha reporter - client mode", () => {
   });
 
   it("receives message on suite end", (done) => {
-    const mocha = initializeMocha(IpcMode.client, id);
+    const mocha = initializeMocha(IpcMode.CLIENT_NET, id);
     const suite = new Mocha.Suite("Test Suite");
     let mochaRunner;
     suite.addTest(

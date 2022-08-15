@@ -8,7 +8,7 @@ describe("getDefaultOptions", () => {
     const options = {};
     const expectedResult = {
       ipcSocketId: "ipc-reporter",
-      ipcMode: IpcMode.client,
+      ipcMode: IpcMode.CLIENT_NET,
       nodeIpcConfig: { ...ipc.config, silent: true },
     };
 
@@ -19,7 +19,7 @@ describe("getDefaultOptions", () => {
     const options = { ipcSocketId: "test-reporter" };
     const expectedResult = {
       ipcSocketId: "test-reporter",
-      ipcMode: IpcMode.client,
+      ipcMode: IpcMode.CLIENT_NET,
       nodeIpcConfig: { ...ipc.config, silent: true },
     };
 
@@ -30,7 +30,7 @@ describe("getDefaultOptions", () => {
     const options = { nodeIpcConfig: { id: "test" } };
     const expectedResult = {
       ipcSocketId: "ipc-reporter",
-      ipcMode: IpcMode.client,
+      ipcMode: IpcMode.CLIENT_NET,
       nodeIpcConfig: { ...ipc.config, silent: true, id: "test" },
     };
 
