@@ -2,7 +2,7 @@
   "name": "@nikkoni/ipc-mocha-reporter",
   "version": "0.1.0",
   "description": "",
-  "main": "src/main.ts",
+  "main": "lib/main.js",
   "scripts": {
     "build": "swc src -d lib",
     "test": "yarn build && mocha",
