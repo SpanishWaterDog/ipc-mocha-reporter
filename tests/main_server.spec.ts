@@ -2,7 +2,7 @@ import IPC from "node-ipc";
 import { IpcMode } from "../src/types/ipcMode";
 import { initializeMocha } from "./utils/mocha";
 
-describe("IPC mocha reporter - server_net mode", () => {
+describe("IPC mocha reporter - server mode", () => {
   let ipc;
   let id = new Date().toISOString();
   let mocha;
@@ -13,7 +13,7 @@ describe("IPC mocha reporter - server_net mode", () => {
     id = new Date().toISOString();
     ipc.config.silent = true;
     ipc.config.id = id;
-    mocha = initializeMocha(IpcMode.SERVER_NET, id);
+    mocha = initializeMocha(IpcMode.SERVER, id);
   });
 
   afterEach(() => {
@@ -24,7 +24,7 @@ describe("IPC mocha reporter - server_net mode", () => {
   });
 
   it("creates server", (done) => {
-    ipc.connectToNet(id, () => {
+    ipc.connectTo(id, () => {
       ipc.of[id].on("connect", () => {
         done();
       });

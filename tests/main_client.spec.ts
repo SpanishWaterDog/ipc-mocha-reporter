@@ -5,7 +5,7 @@ import { RunnerConstants } from "../src/types/runnerConstants";
 import { initializeMocha } from "./utils/mocha";
 import * as assert from "assert";
 
-describe("IPC mocha reporter - client_net mode", () => {
+describe("IPC mocha reporter - client mode", () => {
   let ipc;
   let id = new Date().toISOString();
 
@@ -23,9 +23,9 @@ describe("IPC mocha reporter - client_net mode", () => {
   });
 
   it("connects to ipc on start", (done) => {
-    const mocha = initializeMocha(IpcMode.CLIENT_NET, id);
+    const mocha = initializeMocha(IpcMode.CLIENT, id);
     let mochaRunner;
-    ipc.serveNet(() => {
+    ipc.serve(() => {
       ipc.server.on("connect", () => {
         mochaRunner.abort();
         done();
@@ -37,9 +37,9 @@ describe("IPC mocha reporter - client_net mode", () => {
   });
 
   it("receives message on start", (done) => {
-    const mocha = initializeMocha(IpcMode.CLIENT_NET, id);
+    const mocha = initializeMocha(IpcMode.CLIENT, id);
     let mochaRunner;
-    ipc.serveNet(() => {
+    ipc.serve(() => {
       ipc.server.on(RunnerConstants.EVENT_RUN_BEGIN, () => {
         mochaRunner.abort();
         done();
@@ -51,7 +51,7 @@ describe("IPC mocha reporter - client_net mode", () => {
   });
 
   it("receives message on suite start", (done) => {
-    const mocha = initializeMocha(IpcMode.CLIENT_NET, id);
+    const mocha = initializeMocha(IpcMode.CLIENT, id);
     const suite = new Mocha.Suite("Test Suite");
     let mochaRunner;
     suite.addTest(
@@ -67,7 +67,7 @@ describe("IPC mocha reporter - client_net mode", () => {
     mocha.suite = suite;
     let passed = false;
 
-    ipc.serveNet(() => {
+    ipc.serve(() => {
       ipc.server.on(RunnerConstants.EVENT_SUITE_BEGIN, (data) => {
         assert.deepEqual(data, [
           { "mock test - failing": "pending" },
@@ -86,7 +86,7 @@ describe("IPC mocha reporter - client_net mode", () => {
   });
 
   it("receives message on test pass", (done) => {
-    const mocha = initializeMocha(IpcMode.CLIENT_NET, id);
+    const mocha = initializeMocha(IpcMode.CLIENT, id);
     const suite = new Mocha.Suite("Test Suite");
     let mochaRunner;
     suite.addTest(
@@ -97,7 +97,7 @@ describe("IPC mocha reporter - client_net mode", () => {
     mocha.suite = suite;
     let passed = false;
 
-    ipc.serveNet(() => {
+    ipc.serve(() => {
       ipc.server.on(RunnerConstants.EVENT_TEST_PASS, (data) => {
         assert.deepEqual(data, { "mock test": "passed" });
         mochaRunner.abort();
@@ -111,7 +111,7 @@ describe("IPC mocha reporter - client_net mode", () => {
   });
 
   it("receives message on test fail", (done) => {
-    const mocha = initializeMocha(IpcMode.CLIENT_NET, id);
+    const mocha = initializeMocha(IpcMode.CLIENT, id);
     const suite = new Mocha.Suite("Test Suite");
     let mochaRunner;
     suite.addTest(
@@ -122,7 +122,7 @@ describe("IPC mocha reporter - client_net mode", () => {
     mocha.suite = suite;
     let passed = false;
 
-    ipc.serveNet(() => {
+    ipc.serve(() => {
       ipc.server.on(RunnerConstants.EVENT_TEST_FAIL, (data) => {
         assert.deepEqual(data, { "mock test": "failed" });
         mochaRunner.abort();
@@ -136,7 +136,7 @@ describe("IPC mocha reporter - client_net mode", () => {
   });
 
   it("receives message on suite end", (done) => {
-    const mocha = initializeMocha(IpcMode.CLIENT_NET, id);
+    const mocha = initializeMocha(IpcMode.CLIENT, id);
     const suite = new Mocha.Suite("Test Suite");
     let mochaRunner;
     suite.addTest(
@@ -152,7 +152,7 @@ describe("IPC mocha reporter - client_net mode", () => {
     mocha.suite = suite;
     let passed = false;
 
-    ipc.serveNet(() => {
+    ipc.serve(() => {
       ipc.server.on(RunnerConstants.EVENT_SUITE_END, (data) => {
         assert.deepEqual(data, [
           { "mock test - failing": "failed" },

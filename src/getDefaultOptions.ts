@@ -4,7 +4,7 @@ import { PartialDeep } from "type-fest";
 import ipc from "node-ipc";
 
 export const getDefaultOptions = (options: PartialDeep<Options>): Options => {
-  options.ipcSocketId ??= options.nodeIpcConfig.id ?? ipc.config.id;
+  options.ipcSocketId ??= options.nodeIpcConfig?.id ?? ipc.config.id;
   options.ipcMode ??= IpcMode.CLIENT_NET;
 
   options.nodeIpcConfig = {
