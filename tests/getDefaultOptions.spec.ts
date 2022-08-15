@@ -7,7 +7,7 @@ describe("getDefaultOptions", () => {
   it("should return default config on empty parameters", () => {
     const options = {};
     const expectedResult = {
-      ipcSocketId: "ipc-reporter",
+      ipcSocketId: ipc.config.id,
       ipcMode: IpcMode.CLIENT_NET,
       nodeIpcConfig: { ...ipc.config, silent: true },
     };
@@ -16,10 +16,10 @@ describe("getDefaultOptions", () => {
   });
 
   it("should not overwrite parameters", () => {
-    const options = { ipcSocketId: "test-reporter" };
+    const options = { ipcMode: IpcMode.CLIENT };
     const expectedResult = {
-      ipcSocketId: "test-reporter",
-      ipcMode: IpcMode.CLIENT_NET,
+      ipcSocketId: ipc.config.id,
+      ipcMode: IpcMode.CLIENT,
       nodeIpcConfig: { ...ipc.config, silent: true },
     };
 
@@ -29,7 +29,7 @@ describe("getDefaultOptions", () => {
   it("should update node-ipc parameters", () => {
     const options = { nodeIpcConfig: { id: "test" } };
     const expectedResult = {
-      ipcSocketId: "ipc-reporter",
+      ipcSocketId: "test",
       ipcMode: IpcMode.CLIENT_NET,
       nodeIpcConfig: { ...ipc.config, silent: true, id: "test" },
     };
