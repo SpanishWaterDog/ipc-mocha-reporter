@@ -27,9 +27,18 @@ class IpcReporter {
           console.log(err);
           queue.pause();
         });
+        ipc.of[parsedOptions.ipcSocketId].on("kill", () => {
+          ipc.disconnect(parsedOptions.ipcSocketId);
+          process.exit();
+        });
       });
     } else {
-      ipc.serveNet();
+      ipc.serveNet(() => {
+        ipc.server.on("kill", () => {
+          ipc.server.stop();
+          process.exit();
+        });
+      });
       ipc.server.start();
     }
 
