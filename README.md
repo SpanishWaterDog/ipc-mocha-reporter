@@ -176,10 +176,10 @@ mocha.reporter(
 
 ipc.config.id = 'ipc-reporter';
 ipc.serve(() => {
-	ipc.server.on(RunnerConstants.EVENT_TEST_PASS, (data) => {
-		const [[name, state]] = Object.entries(data);
-		console.log(`Test ${name} is ${state}`);
-	});
+  ipc.server.on(RunnerConstants.EVENT_TEST_PASS, (data) => {
+    const [[name, state]] = Object.entries(data);
+    console.log(`Test ${name} is ${state}`);
+  });
 });
 
 ipc.server.start();
