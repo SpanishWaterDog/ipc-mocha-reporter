@@ -71,7 +71,7 @@ class IpcReporter {
         throw new Error("ipc mode not specified");
     }
 
-    configureRunner(runner, queue);
+    configureRunner(runner, queue, parsedOptions.sendAllData);
   }
 }
 

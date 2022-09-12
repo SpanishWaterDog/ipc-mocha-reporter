@@ -9,6 +9,7 @@ describe("getDefaultOptions", () => {
     const expectedResult = {
       ipcSocketId: ipc.config.id,
       ipcMode: IpcMode.CLIENT_NET,
+      sendAllData: false,
       nodeIpcConfig: { ...ipc.config, silent: true },
     };
 
@@ -20,6 +21,7 @@ describe("getDefaultOptions", () => {
     const expectedResult = {
       ipcSocketId: ipc.config.id,
       ipcMode: IpcMode.CLIENT,
+      sendAllData: false,
       nodeIpcConfig: { ...ipc.config, silent: true },
     };
 
@@ -31,6 +33,7 @@ describe("getDefaultOptions", () => {
     const expectedResult = {
       ipcSocketId: "test",
       ipcMode: IpcMode.CLIENT_NET,
+      sendAllData: false,
       nodeIpcConfig: { ...ipc.config, silent: true, id: "test" },
     };
 

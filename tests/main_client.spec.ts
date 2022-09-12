@@ -167,4 +167,32 @@ describe("IPC mocha reporter - client mode", () => {
 
     mochaRunner = mocha.run();
   });
+
+  it.only("receives all data if sendAllData parameter is set", (done) => {
+    const mocha = initializeMocha(IpcMode.CLIENT, id, { sendAllData: true });
+    const suite = new Mocha.Suite("Test Suite");
+    let mochaRunner;
+    suite.addTest(
+      new Mocha.Test("mock test", () => {
+        return Promise.resolve(true);
+      })
+    );
+    mocha.suite = suite;
+
+    ipc.serve(() => {
+      ipc.server.on(RunnerConstants.EVENT_RUN_BEGIN, (data) => {
+        console.log(1);
+        console.log(data);
+      });
+      ipc.server.on(RunnerConstants.EVENT_SUITE_BEGIN, (data) => {
+        console.log(2);
+        console.log(data);
+        mochaRunner.abort();
+        done();
+      });
+    });
+    ipc.server.start();
+
+    mochaRunner = mocha.run();
+  });
 });

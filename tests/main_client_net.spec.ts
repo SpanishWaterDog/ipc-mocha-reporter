@@ -12,7 +12,7 @@ describe("IPC mocha reporter - client_net mode", () => {
   beforeEach(() => {
     ipc = new IPC.IPC();
     id = new Date().toISOString();
-    ipc.config.silent = true;
+    ipc.config.silent = false;
     ipc.config.id = id;
   });
 
@@ -161,6 +161,34 @@ describe("IPC mocha reporter - client_net mode", () => {
         mochaRunner.abort();
         if (!passed) done();
         passed = true;
+      });
+    });
+    ipc.server.start();
+
+    mochaRunner = mocha.run();
+  });
+
+  it.only("receives all data if sendAllData parameter is set", (done) => {
+    const mocha = initializeMocha(IpcMode.CLIENT, id, { sendAllData: false });
+    const suite = new Mocha.Suite("Test Suite");
+    let mochaRunner;
+    suite.addTest(
+      new Mocha.Test("mock test", () => {
+        return Promise.resolve(true);
+      })
+    );
+    mocha.suite = suite;
+
+    ipc.serveNet(() => {
+      ipc.server.on(RunnerConstants.EVENT_RUN_BEGIN, (data) => {
+        console.log(1);
+        console.log(data);
+      });
+      ipc.server.on(RunnerConstants.EVENT_SUITE_BEGIN, (data) => {
+        console.log(2);
+        console.log(data);
+        mochaRunner.abort();
+        done();
       });
     });
     ipc.server.start();

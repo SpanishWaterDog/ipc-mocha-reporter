@@ -41,6 +41,14 @@ The id of this socket or service.
 This field has higher priority over id in `nodeIpcConfig` object.  
 Type: `string`
 
+### sendAllData
+
+If true all reporter data will be passed directly to ipc.  
+If false [only test states](#Events) will be sent.
+
+Type: `boolean`  
+Default: `false`
+
 ### nodeIpcConfig
 
 Object passed to `node-ipc`.  
@@ -145,6 +153,8 @@ cypress run --reporter "@nikkoni/ipc-mocha-reporter" --reporter-option "ipcMode=
 ## Events
 
 Event names are the same as [mocha event names](https://mochajs.org/api/runner.js.html).
+
+If [sendAllData](#sendAllData) parameter is set to false the following data will be sent:
 | Event constant name | Event name | Data type |
 | ------------- |:-------------:| -----:|
 | EVENT_RUN_BEGIN | start | `{}` |
@@ -153,6 +163,8 @@ Event names are the same as [mocha event names](https://mochajs.org/api/runner.j
 | EVENT_TEST_FAIL | fail | `[ {[title]: "fail"} ]` |
 | EVENT_SUITE_END | suite end | `[ {[title]: state} ]` |
 | EVENT_RUN_END | end | `{}` |
+
+If [sendAllData](#sendAllData) parameter is set to true data types will be the same as [mocha listener argument](https://github.com/DefinitelyTyped/DefinitelyTyped/blob/0a44325a7f5dd4ce778c3d4dd34c8d0ef620c1e7/types/mocha/index.d.ts#L1601).
 
 <br />
 
