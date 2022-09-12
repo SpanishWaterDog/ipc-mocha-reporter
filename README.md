@@ -21,6 +21,8 @@
 
 ---
 
+> **_Disclaimer:_** This package uses node-ipc in version 9.2.1 which should be free from malicious code
+
 ## Configuration
 
 ### ipcMode
@@ -92,7 +94,7 @@ You can also use JavaScript object, YAML or JSONC as seen [here](https://github.
 #### From command-line / bash script
 
 ```bash
-mocha --reporter "@nikkoni/ipc-mocha-reporter" --reporter-option "ipcMode=client,ipcSocketId=custom-id"
+mocha --reporter "@nikkoni/ipc-mocha-reporter" --reporter-options "ipcMode=client,ipcSocketId=custom-id"
 ```
 
 <br />
@@ -137,7 +139,7 @@ cypress
 #### From command-line / bash script
 
 ```bash
-cypress run --reporter "@nikkoni/ipc-mocha-reporter" --reporter-option "ipcMode=client,ipcSocketId=custom-id"
+cypress run --reporter "@nikkoni/ipc-mocha-reporter" --reporter-options "ipcMode=client,ipcSocketId=custom-id"
 ```
 
 ---
