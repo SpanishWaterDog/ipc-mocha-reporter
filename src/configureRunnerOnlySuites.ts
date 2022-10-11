@@ -14,9 +14,9 @@ export const configureRunnerOnlySuites = (
         data: {},
       });
     })
-    .on(RunnerConstants.EVENT_SUITE_BEGIN, (x) => {
+    .on(RunnerConstants.EVENT_SUITE_BEGIN, data => {
       const suites = _.flatten(
-        x.suites.map((suite) =>
+        data.suites.map((suite) =>
           suite.tests.reduce(
             (acc, { title, state }) => ({
               ...acc,
@@ -26,7 +26,7 @@ export const configureRunnerOnlySuites = (
           )
         )
       );
-      const singleTests = x.tests.map(({ title, state }) => ({
+      const singleTests = data.tests.map(({ title, state }) => ({
         [title]: state ?? "pending",
       }));
 
