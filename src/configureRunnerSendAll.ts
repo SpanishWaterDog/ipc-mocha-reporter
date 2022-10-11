@@ -1,5 +1,6 @@
 import { Runner } from "mocha";
 import { createQueue } from "./createQueue";
+import { removeParentKeys } from "./removeParentKeys";
 import { RunnerConstants } from "./types/runnerConstants";
 
 export const configureRunnerSendAll = (
@@ -8,9 +9,10 @@ export const configureRunnerSendAll = (
 ) => {
   Object.values(RunnerConstants).forEach((event) => {
     runner.on(event, (data) => {
-      queue.push({
+ 
+     queue.push({
         event: event,
-        data,
+        data: removeParentKeys(data),
       });
     });
   });
